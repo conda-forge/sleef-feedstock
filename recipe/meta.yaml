@@ -7,12 +7,6 @@ package:
 source:
   url: https://github.com/shibatch/sleef/archive/{{ version }}.tar.gz
   sha256: de4f3d992cf2183a872cd397f517c1defcd3ee6cafa2ce5fa36963bd7e562446
-  patches:
-    - patches/install_dll.diff  # [win]
-    - patches/353.patch
-    - patches/355.patch
-    - patches/358.patch
-    - patches/359.patch
 
 build:
   number: 0
