@@ -17,6 +17,7 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == 1 ]]; then
 
     cmake \
       -GNinja \
+      -DBUILD_TESTS=no \
       -DCMAKE_INSTALL_PREFIX=$BUILD_PREFIX \
       -DCMAKE_PREFIX_PATH=$BUILD_PREFIX \
       -DCMAKE_INSTALL_LIBDIR=lib \
@@ -41,6 +42,7 @@ fi
 
 cmake ${CMAKE_ARGS} \
     -GNinja \
+    -DBUILD_TESTS=no \
     -DCMAKE_INSTALL_PREFIX=$PREFIX \
     -DCMAKE_PREFIX_PATH=$PREFIX \
     -DCMAKE_INSTALL_LIBDIR=lib \
