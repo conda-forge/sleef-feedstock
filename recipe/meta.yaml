@@ -1,4 +1,4 @@
-{% set version = "3.5.1" %}
+{% set version = "3.6.1" %}
 
 package:
   name: sleef
@@ -6,16 +6,10 @@ package:
 
 source:
   url: https://github.com/shibatch/sleef/archive/{{ version }}.tar.gz
-  sha256: 415ee9b1bcc5816989d3d4d92afd0cd3f9ee89cbd5a33eb008e69751e40438ab
-  patches:
-    - patches/install_dll.diff  # [win]
-    - patches/353.patch
-    - patches/355.patch
-    - patches/358.patch
-    - patches/359.patch
+  sha256: 441dcf98c0f22e5d5e553d007f3b93e89eb58e4c66e340da8af5e7f67d1dc24c
 
 build:
-  number: 2
+  number: 0
   run_exports:
     # SO name changes at minor rev bumps.
     - {{ pin_subpackage('sleef', max_pin='x') }}
@@ -26,6 +20,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - cmake
     - ninja        # [unix]
     - llvm-openmp  # [osx]
