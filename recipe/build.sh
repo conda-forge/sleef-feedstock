@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -ex
-
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == 1 ]]; then
   (
     mkdir -p native-build
@@ -22,7 +20,6 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == 1 ]]; then
       -DSLEEF_BUILD_TESTS=OFF \
       -DSLEEF_BUILD_SHARED_LIBS=ON \
       -DSLEEF_BUILD_SCALAR_LIB=ON \
-      -DSLEEF_BUILD_DFT=ON \
       -DSLEEF_BUILD_QUAD=ON \
       -DSLEEF_BUILD_GNUABI_LIBS=ON \
       -DCMAKE_INSTALL_PREFIX=$BUILD_PREFIX \
@@ -30,7 +27,6 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == 1 ]]; then
       -DCMAKE_INSTALL_LIBDIR=lib \
       ..
     ninja -j${CPU_COUNT}
-    popd
   )
   CMAKE_ARGS="${CMAKE_ARGS} -DNATIVE_BUILD_DIR=$PWD/native-build"
 fi
@@ -39,12 +35,9 @@ mkdir build
 cd build
 
 if [[ "$target_platform" == "osx-arm64" ]]; then
-    # Set up OpenMP for arm64
-    export CC=$CLANG
-    export CXX=$CLANGXX
-    export CFLAGS="$CFLAGS -I$PREFIX/include -Xclang -fopenmp"
-    export CXXFLAGS="$CXXFLAGS -I$PREFIX/include -Xclang -fopenmp"
-    export LDFLAGS="$LDFLAGS -L$PREFIX/lib -Wl,-rpath,$PREFIX/lib -lomp"
+    # clang 11.0.0 segfaults. So use Apple's clang.
+    export CC=/usr/bin/clang
+    export CFLAGS="$CFLAGS -isysroot $CONDA_BUILD_SYSROOT -arch arm64"
 fi
 
 if [[ "$target_platform" == linux-* ]]; then
@@ -56,7 +49,6 @@ cmake ${CMAKE_ARGS} \
     -DSLEEF_BUILD_TESTS=OFF \
     -DSLEEF_BUILD_SHARED_LIBS=ON \
     -DSLEEF_BUILD_SCALAR_LIB=ON \
-    -DSLEEF_BUILD_DFT=ON \
     -DSLEEF_BUILD_QUAD=ON \
     -DSLEEF_BUILD_GNUABI_LIBS=ON \
     -DCMAKE_INSTALL_PREFIX=$PREFIX \

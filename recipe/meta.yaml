@@ -35,7 +35,6 @@ test:
   commands:
     - test -f $PREFIX/include/sleef.h                          # [unix]
     - test -f $PREFIX/lib/libsleef${SHLIB_EXT}                 # [unix]
-    - test -f $PREFIX/lib/libsleefdft${SHLIB_EXT}              # [unix]
     - test -f $PREFIX/lib/libsleefquad${SHLIB_EXT}             # [linux]
     - test -f $PREFIX/include/sleefquad.h                      # [linux]
     - if not exist %PREFIX%\\Library\\include\\sleef.h exit 1  # [win]
@@ -49,4 +48,3 @@ about:
 extra:
   recipe-maintainers:
     - bluescarni
-    
