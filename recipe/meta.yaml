@@ -29,6 +29,7 @@ requirements:
     - libgomp      # [linux]
   host:
     - openssl
+    - llvm-openmp  # [osx]
 
 test:
   commands:
