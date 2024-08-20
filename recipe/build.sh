@@ -39,23 +39,16 @@ mkdir build
 cd build
 
 if [[ "$target_platform" == "osx-arm64" ]]; then
-    # Set up cross-compilation for arm64
-    export CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_SYSTEM_NAME=Darwin -DCMAKE_SYSTEM_PROCESSOR=arm64 -DCMAKE_OSX_ARCHITECTURES=arm64"
-    export CONDA_BUILD_SYSROOT="${CONDA_BUILD_SYSROOT:-/opt/MacOSX11.0.sdk}"
-    export CC=/usr/bin/clang
+    # Set up OpenMP for arm64
+    export CC=$CLANG
     export CXX=$CLANGXX
-    export CFLAGS="$CFLAGS -isysroot $CONDA_BUILD_SYSROOT -I$PREFIX/include"
-    export CXXFLAGS="$CXXFLAGS -isysroot $CONDA_BUILD_SYSROOT -I$PREFIX/include"
-    export LDFLAGS="$LDFLAGS -isysroot $CONDA_BUILD_SYSROOT -L$PREFIX/lib -Wl,-rpath,$PREFIX/lib"
-elif [[ "$target_platform" == "osx-64" ]]; then
-    # Set up for x86_64 macOS build
-    export CC=/usr/bin/clang
-    export CXX=$CLANGXX
-    export CFLAGS="$CFLAGS -I$PREFIX/include"
-    export CXXFLAGS="$CXXFLAGS -I$PREFIX/include"
-    export LDFLAGS="$LDFLAGS -L$PREFIX/lib -Wl,-rpath,$PREFIX/lib"
-elif [[ "$target_platform" == linux-* ]]; then
-    export LDFLAGS="-lrt ${LDFLAGS}"
+    export CFLAGS="$CFLAGS -I$PREFIX/include -Xclang -fopenmp"
+    export CXXFLAGS="$CXXFLAGS -I$PREFIX/include -Xclang -fopenmp"
+    export LDFLAGS="$LDFLAGS -L$PREFIX/lib -Wl,-rpath,$PREFIX/lib -lomp"
+fi
+
+if [[ "$target_platform" == linux-* ]]; then
+    LDFLAGS="-lrt ${LDFLAGS}"
 fi
 
 cmake ${CMAKE_ARGS} \
