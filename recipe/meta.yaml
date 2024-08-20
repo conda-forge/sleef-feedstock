@@ -20,9 +20,10 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    - {{ stdlib("c") }}
+    - {{ compiler('cxx') }}
     - cmake
     - ninja        # [unix]
+    - make         # [unix]
     - llvm-openmp  # [osx]
     - libgomp      # [linux]
   host:
@@ -31,6 +32,10 @@ requirements:
 test:
   commands:
     - test -f $PREFIX/include/sleef.h                          # [unix]
+    - test -f $PREFIX/lib/libsleef${SHLIB_EXT}                 # [unix]
+    - test -f $PREFIX/lib/libsleefdft${SHLIB_EXT}              # [unix]
+    - test -f $PREFIX/lib/libsleefquad${SHLIB_EXT}             # [linux]
+    - test -f $PREFIX/include/sleefquad.h                      # [linux]
     - if not exist %PREFIX%\\Library\\include\\sleef.h exit 1  # [win]
 
 about:
@@ -42,3 +47,11 @@ about:
 extra:
   recipe-maintainers:
     - bluescarni
+
+files:
+  - lib/libsleef${SHLIB_EXT}*     # [unix]
+  - lib/libsleefdft${SHLIB_EXT}*  # [unix]
+  - lib/libsleefquad${SHLIB_EXT}* # [linux]
+  - include/sleef.h
+  - include/sleefdft.h
+  - include/sleefquad.h           # [linux]
