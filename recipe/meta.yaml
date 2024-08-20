@@ -47,11 +47,3 @@ about:
 extra:
   recipe-maintainers:
     - bluescarni
-
-files:
-  - lib/libsleef${SHLIB_EXT}*     # [unix]
-  - lib/libsleefdft${SHLIB_EXT}*  # [unix]
-  - lib/libsleefquad${SHLIB_EXT}* # [linux]
-  - include/sleef.h
-  - include/sleefdft.h
-  - include/sleefquad.h           # [linux]
