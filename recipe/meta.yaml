@@ -9,7 +9,7 @@ source:
   sha256: 441dcf98c0f22e5d5e553d007f3b93e89eb58e4c66e340da8af5e7f67d1dc24c
 
 build:
-  number: 1
+  number: 2
   run_exports:
     # SO name changes at minor rev bumps.
     - {{ pin_subpackage('sleef', max_pin='x') }}
