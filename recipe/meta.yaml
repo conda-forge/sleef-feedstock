@@ -24,7 +24,6 @@ requirements:
     - {{ stdlib("c") }}
     - cmake
     - ninja        # [unix]
-    - make         # [unix]
     - llvm-openmp  # [osx]
     - libgomp      # [linux]
   host:
