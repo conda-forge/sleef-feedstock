@@ -34,12 +34,6 @@ fi
 mkdir build
 cd build
 
-if [[ "$target_platform" == "osx-arm64" ]]; then
-    # clang 11.0.0 segfaults. So use Apple's clang.
-    export CC=/usr/bin/clang
-    export CFLAGS="$CFLAGS -isysroot $CONDA_BUILD_SYSROOT -arch arm64"
-fi
-
 if [[ "$target_platform" == linux-* ]]; then
     LDFLAGS="-lrt ${LDFLAGS}"
 fi
@@ -56,4 +50,4 @@ cmake ${CMAKE_ARGS} \
     -DCMAKE_INSTALL_LIBDIR=lib \
     ..
 
-cmake --build . --target install
+ninja -j${CPU_COUNT} install

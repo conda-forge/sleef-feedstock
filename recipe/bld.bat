@@ -3,6 +3,7 @@ cd build
 
 cmake ^
     -G "Ninja" ^
+    -DCMAKE_BUILD_TYPE=Release ^
     -DSLEEF_BUILD_TESTS=OFF ^
     -DSLEEF_BUILD_SHARED_LIBS=ON ^
     -DSLEEF_BUILD_SCALAR_LIB=ON ^
