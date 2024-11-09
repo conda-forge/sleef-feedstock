@@ -17,6 +17,7 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == 1 ]]; then
 
     cmake \
       -GNinja \
+      -DCMAKE_BUILD_TYPE=Release \
       -DSLEEF_BUILD_TESTS=OFF \
       -DSLEEF_BUILD_SHARED_LIBS=ON \
       -DSLEEF_BUILD_SCALAR_LIB=ON \
@@ -40,6 +41,7 @@ fi
 
 cmake ${CMAKE_ARGS} \
     -GNinja \
+    -DCMAKE_BUILD_TYPE=Release \
     -DSLEEF_BUILD_TESTS=OFF \
     -DSLEEF_BUILD_SHARED_LIBS=ON \
     -DSLEEF_BUILD_SCALAR_LIB=ON \
