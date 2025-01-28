@@ -1,4 +1,4 @@
-{% set version = "3.7" %}
+{% set version = "3.8" %}
 
 package:
   name: sleef
@@ -6,10 +6,10 @@ package:
 
 source:
   url: https://github.com/shibatch/sleef/archive/{{ version }}.tar.gz
-  sha256: 1fb094c1ba4c9f6ba16013715d6fdbd5b893c68e1737b6115ba31e27807de591
+  sha256: a12ccd50f57083c530e1c76f10d52865defbd19fc9e2c85b483493065709874a
 
 build:
-  number: 2
+  number: 0
   run_exports:
     # SO name changes at minor rev bumps.
     - {{ pin_subpackage('sleef', max_pin='x') }}
