@@ -1,4 +1,4 @@
-{% set version = "3.8" %}
+{% set version = "3.9.0" %}
 
 package:
   name: sleef
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/shibatch/sleef/archive/{{ version }}.tar.gz
-  sha256: a12ccd50f57083c530e1c76f10d52865defbd19fc9e2c85b483493065709874a
+  sha256: af60856abac08a3b5e72a8d156dd71fec1f7ac23de8ee67793f45f9edcdf0908
 
 build:
   number: 0
