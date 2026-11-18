@@ -15,6 +15,7 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == 1 ]]; then
     # Unset them as we're ok with builds that are either slow or non-portable
     unset CFLAGS
     unset CPPFLAGS
+    unset CXXFLAGS
 
     cmake \
       -GNinja \
